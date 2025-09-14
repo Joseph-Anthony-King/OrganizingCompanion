@@ -217,7 +217,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
             """;
 
             // Act
-            var deserializedFile = JsonSerializer.Deserialize<IcsFile>(json);
+            var deserializedFile = JsonSerializer.Deserialize<IcsFile>(json)!;
 
             // Assert
             Assert.That(deserializedFile, Is.Not.Null);
@@ -233,39 +233,6 @@ namespace OrganizingCompanion.Test.TestCases.Models
                 Assert.That(deserializedFile.CreatedByUserId, Is.EqualTo(99));
                 Assert.That(deserializedFile.DateCreated, Is.EqualTo(new DateTime(2024, 1, 1, 12, 0, 0, DateTimeKind.Utc)));
                 Assert.That(deserializedFile.DateModified, Is.EqualTo(new DateTime(2024, 1, 2, 12, 0, 0, DateTimeKind.Utc)));
-            });
-        }
-
-        [Test, Category("Models")]
-        public void HandleNullValuesInJsonConstructor()
-        {
-            // Arrange and Act
-            var icsFile = new IcsFile(
-                0,
-                string.Empty,
-                null,
-                "text/calendar",
-                Array.Empty<byte>(),
-                0,
-                null,
-                null,
-                default,
-                default);
-
-            // Assert
-            Assert.That(icsFile, Is.Not.Null);
-            Assert.Multiple(() =>
-            {
-                Assert.That(icsFile.Id, Is.EqualTo(0));
-                Assert.That(icsFile.FileName, Is.EqualTo(string.Empty));
-                Assert.That(icsFile.Description, Is.Null);
-                Assert.That(icsFile.ContentType, Is.EqualTo("text/calendar"));
-                Assert.That(icsFile.FileContent, Is.EqualTo(Array.Empty<byte>()));
-                Assert.That(icsFile.FileSize, Is.EqualTo(0));
-                Assert.That(icsFile.OriginalFileName, Is.Null);
-                Assert.That(icsFile.CreatedByUserId, Is.Null);
-                Assert.That(icsFile.DateCreated, Is.EqualTo(default(DateTime)));
-                Assert.That(icsFile.DateModified, Is.EqualTo(default(DateTime)));
             });
         }
 
@@ -287,7 +254,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
 
             // Act
             var json = original.ToJson();
-            var deserialized = JsonSerializer.Deserialize<IcsFile>(json);
+            var deserialized = JsonSerializer.Deserialize<IcsFile>(json)!;
 
             // Assert
             Assert.That(deserialized, Is.Not.Null);

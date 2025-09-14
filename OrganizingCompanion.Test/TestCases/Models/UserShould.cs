@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System.Text.Json;
+using NUnit.Framework;
 using OrganizingCompanion.Core.Interfaces.Models;
 using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
 using OrganizingCompanion.Core.Models;
-using System.Text.Json;
 
 namespace OrganizingCompanion.Test.TestCases.Models
 {
@@ -210,13 +210,13 @@ namespace OrganizingCompanion.Test.TestCases.Models
             var json = "{\"id\":5,\"username\":\"testUser\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@example.com\",\"phone\":\"123-456-7890\",\"password\":\"secret\",\"isOrganizer\":true,\"dateCreated\":\"2023-01-01T10:00:00\",\"dateModified\":\"2023-01-02T15:30:00\"}";
 
             // Act
-            var user = JsonSerializer.Deserialize<User>(json);
+            var user = JsonSerializer.Deserialize<User>(json)!;
 
             // Assert
             Assert.Multiple(() =>
             {
                 Assert.That(user, Is.Not.Null);
-                Assert.That(user!.Id, Is.EqualTo(5));
+                Assert.That(user.Id, Is.EqualTo(5));
                 Assert.That(user.UserName, Is.EqualTo("testUser"));
                 Assert.That(user.FirstName, Is.EqualTo("John"));
                 Assert.That(user.LastName, Is.EqualTo("Doe"));
@@ -364,13 +364,13 @@ namespace OrganizingCompanion.Test.TestCases.Models
 
             // Act
             var json = originalUser.ToJson();
-            var deserializedUser = JsonSerializer.Deserialize<User>(json);
+            var deserializedUser = JsonSerializer.Deserialize<User>(json)!;
 
             // Assert
             Assert.Multiple(() =>
             {
                 Assert.That(deserializedUser, Is.Not.Null);
-                Assert.That(deserializedUser!.Id, Is.EqualTo(originalUser.Id));
+                Assert.That(deserializedUser.Id, Is.EqualTo(originalUser.Id));
                 Assert.That(deserializedUser.UserName, Is.EqualTo(originalUser.UserName));
                 Assert.That(deserializedUser.FirstName, Is.EqualTo(originalUser.FirstName));
                 Assert.That(deserializedUser.LastName, Is.EqualTo(originalUser.LastName));

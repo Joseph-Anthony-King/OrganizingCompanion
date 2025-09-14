@@ -9,8 +9,6 @@
         string Phone { get; set; }
         string? Password { get; set; }
         bool IsOrganizer { get; set; }
-        DateTime DateCreated { get; set; }
-        DateTime DateModified { get; set; }
         void ScrubPassword();
     }
 }

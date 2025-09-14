@@ -9,7 +9,5 @@ namespace OrganizingCompanion.Core.Interfaces.Models.DomainEntities
         long FileSize { get; set; }
         string? OriginalFileName { get; set; }
         int? CreatedByUserId { get; set; }
-        DateTime DateCreated { get; set; }
-        DateTime DateModified { get; set; }
     }
 }
