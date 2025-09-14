@@ -39,9 +39,11 @@ namespace OrganizingCompanion.Test.TestCases.Models
         public void HaveTheExpectedProperties()
         {
             // Arrange and Act
+
             // Assert
             Assert.Multiple(() =>
             {
+                Assert.That(sut?.Id, Is.TypeOf<int>());
                 Assert.That(sut!.UserName, Is.TypeOf<string>());
                 Assert.That(sut!.UserName, Is.EqualTo(string.Empty));
                 Assert.That(sut!.FirstName, Is.Null);
