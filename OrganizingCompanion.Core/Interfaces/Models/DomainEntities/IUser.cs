@@ -8,6 +8,7 @@
         string Email { get; set; }
         string Phone { get; set; }
         string? Password { get; set; }
+        List<IShift> Shifts { get; set; }
         bool IsOrganizer { get; set; }
         void ScrubPassword();
     }

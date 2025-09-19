@@ -1,4 +1,8 @@
-﻿namespace OrganizingCompanion.Core.Interfaces.Models
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("OrganizingCompanion.Test")]
+
+namespace OrganizingCompanion.Core.Interfaces.Models
 {
     internal interface IDomainEntity
     {

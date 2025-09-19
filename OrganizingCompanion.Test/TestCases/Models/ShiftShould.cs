@@ -78,7 +78,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
         public void SerializeToJson()
         {
             // Arrange
-            var expectedJson = "{\"id\":0,\"startDateTime\":\"0001-01-01T00:00:00\",\"endDateTime\":\"0001-01-01T00:00:00\",\"userId\":0,\"user\":null,\"dateCreated\":\"0001-01-01T00:00:00\"}";
+            var expectedJson = "{\"id\":0,\"startDateTime\":\"0001-01-01T00:00:00\",\"endDateTime\":\"0001-01-01T00:00:00\",\"userId\":0,\"user\":null,\"dateCreated\":\"0001-01-01T00:00:00\",\"dateModified\":null}";
             // Act
             var json = sut!.ToJson();
             // Assert
@@ -94,8 +94,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
             shift.Id = 1;
             shift.StartDateTime = new DateTime(2024, 1, 15, 9, 0, 0, DateTimeKind.Utc);
             shift.EndDateTime = new DateTime(2024, 1, 15, 17, 0, 0, DateTimeKind.Utc);
-            var expectedString = "OrganizingCompanion.Core.Models.Shift.Id:1.StartDateTime:1/15/2024 9:00:00 AM.EndDateTime:1/15/2024 5:00:00 PM.UserName:1/15/2024 5:00:00 PM";
-
+            var expectedString = "OrganizingCompanion.Core.Models.Shift.Id:1.StartDateTime:1/15/2024 9:00:00 AM.EndDateTime:1/15/2024 5:00:00 PM";
             // Act
             var str = sut!.ToString();
 
@@ -151,9 +150,11 @@ namespace OrganizingCompanion.Test.TestCases.Models
         public void SerializeToJsonWithUser()
         {
             // Arrange
-            var testUser = new User();
-            testUser.Id = 123;
-            testUser.UserName = "testuser";
+            var testUser = new User
+            {
+                Id = 123,
+                UserName = "testuser"
+            };
             var shift = (Shift)sut!;
             shift.Id = 1;
             shift.StartDateTime = new DateTime(2024, 1, 1, 9, 0, 0);
@@ -163,7 +164,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
             shift.DateCreated = new DateTime(2024, 1, 1, 8, 0, 0);
 
             // Act
-            var json = sut!.ToJson();
+            var json = shift!.ToJson();
 
             // Assert
             Assert.That(json, Is.Not.Null);
@@ -255,7 +256,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
         public void ToStringWithZeroValues()
         {
             // Arrange
-            var expectedString = "OrganizingCompanion.Core.Models.Shift.Id:0.StartDateTime:1/1/0001 12:00:00 AM.EndDateTime:1/1/0001 12:00:00 AM.UserName:1/1/0001 12:00:00 AM";
+            var expectedString = "OrganizingCompanion.Core.Models.Shift.Id:0.StartDateTime:1/1/0001 12:00:00 AM.EndDateTime:1/1/0001 12:00:00 AM";
 
             // Act
             var str = sut!.ToString();

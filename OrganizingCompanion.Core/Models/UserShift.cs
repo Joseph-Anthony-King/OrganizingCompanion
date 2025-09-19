@@ -8,7 +8,7 @@ using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
 [assembly: InternalsVisibleTo("OrganizingCompanion.Test")]
 namespace OrganizingCompanion.Core.Models
 {
-    internal class Shift : IShift
+    internal class UserShift : IUserShift
     {
         #region Fields
         private readonly JsonSerializerOptions _serializerOptions = new()
@@ -20,41 +20,33 @@ namespace OrganizingCompanion.Core.Models
         #region Properties
         #region Explicit interface implementation
         int IDomainEntity.Id { get => Id; set => Id = value; }
-        DateTime IShift.StartDateTime { get => StartDateTime; set => StartDateTime = value; }
-        DateTime IShift.EndDateTime { get => EndDateTime; set => EndDateTime = value; }
-        int IShift.UserId { get => UserId; set => UserId = value; }
-        User? IShift.User { get => User; set => User = value; }
+        int IUserShift.UserId { get => UserId; set => UserId = value; }
+        int IUserShift.ShiftId { get => ShiftId; set => ShiftId = value; }
         DateTime IDomainEntity.DateCreated { get => DateCreated; set => DateCreated = value; }
         DateTime? IDomainEntity.DateModified { get => DateModified; set => DateModified = value; }
         #endregion
 
         [Required, JsonPropertyName("id")] public int Id { get; set; } = 0;
-        [Required, JsonPropertyName("startDateTime")] public DateTime StartDateTime { get; set; }
-        [Required, JsonPropertyName("endDateTime")] public DateTime EndDateTime { get; set; }
         [Required, JsonPropertyName("userId")] public int UserId { get; set; } = 0;
-        [Required, JsonPropertyName("user")] public User? User { get; set; } = null;
+        [Required, JsonPropertyName("shiftId")] public int ShiftId { get; set; } = 0;
         [Required, JsonPropertyName("dateCreated")] public DateTime DateCreated { get; set; } = default;
         [Required, JsonPropertyName("dateModified")] public DateTime? DateModified { get; set; } = null;
         #endregion
 
         #region Constructors
-        public Shift() { }
+        public UserShift() { }
 
         [JsonConstructor]
-        public Shift(
+        public UserShift(
             int id,
-            DateTime startDateTime,
-            DateTime endDateTime,
             int userId,
-            User? user,
+            int shiftId,
             DateTime dateCreated,
             DateTime? dateModified)
         {
             Id = id;
-            StartDateTime = startDateTime;
-            EndDateTime = endDateTime;
             UserId = userId;
-            User = user;
+            ShiftId = shiftId;
             DateCreated = dateCreated;
             DateModified = dateModified;
         }
@@ -64,8 +56,8 @@ namespace OrganizingCompanion.Core.Models
         public IDomainEntity Cast<T>() => throw new NotImplementedException();
         public string ToJson() => JsonSerializer.Serialize(this, _serializerOptions);
         public override string ToString() => string.Format(
-            base.ToString() + ".Id:{0}.StartDateTime:{1}.EndDateTime:{2}",
-            Id, StartDateTime, EndDateTime);
+            base.ToString() + ".Id:{0}.UserId:{1}.ShiftId:{2}",
+            Id, UserId, ShiftId);
         #endregion
     }
 }

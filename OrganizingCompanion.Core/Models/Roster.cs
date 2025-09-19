@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using OrganizingCompanion.Core.Interfaces.Models;
 using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
 
-[assembly: InternalsVisibleTo("OrganizingCompanion.Test")]
 namespace OrganizingCompanion.Core.Models
 {
-    internal class Shift : IShift
+    internal class Roster : IRoster
     {
         #region Fields
         private readonly JsonSerializerOptions _serializerOptions = new()
@@ -20,41 +18,44 @@ namespace OrganizingCompanion.Core.Models
         #region Properties
         #region Explicit interface implementation
         int IDomainEntity.Id { get => Id; set => Id = value; }
-        DateTime IShift.StartDateTime { get => StartDateTime; set => StartDateTime = value; }
-        DateTime IShift.EndDateTime { get => EndDateTime; set => EndDateTime = value; }
-        int IShift.UserId { get => UserId; set => UserId = value; }
-        User? IShift.User { get => User; set => User = value; }
+        List<IUser> IRoster.Users { get => Users; set => Users = value; }
+        List<IShift> IRoster.Shifts { get => Shifts; set => Shifts = value; }
+        DateTime IRoster.StartDateTime { get => StartDateTime; set => StartDateTime = value; }
+        DateTime IRoster.EndDateTime { get => EndDateTime; set => EndDateTime = value; }
         DateTime IDomainEntity.DateCreated { get => DateCreated; set => DateCreated = value; }
         DateTime? IDomainEntity.DateModified { get => DateModified; set => DateModified = value; }
         #endregion
 
         [Required, JsonPropertyName("id")] public int Id { get; set; } = 0;
-        [Required, JsonPropertyName("startDateTime")] public DateTime StartDateTime { get; set; }
-        [Required, JsonPropertyName("endDateTime")] public DateTime EndDateTime { get; set; }
-        [Required, JsonPropertyName("userId")] public int UserId { get; set; } = 0;
-        [Required, JsonPropertyName("user")] public User? User { get; set; } = null;
+        [Required, JsonPropertyName("users")] public List<IUser> Users { get; set; } = [];
+        [Required, JsonPropertyName("shifts")] public List<IShift> Shifts { get; set; } = [];
+        [Required, JsonPropertyName("completed")] public bool Completed { get; set; } = false;
+        [Required, JsonPropertyName("startDateTime")] public DateTime StartDateTime { get; set; } = default;
+        [Required, JsonPropertyName("endDateTime")] public DateTime EndDateTime { get; set; } = default;
         [Required, JsonPropertyName("dateCreated")] public DateTime DateCreated { get; set; } = default;
         [Required, JsonPropertyName("dateModified")] public DateTime? DateModified { get; set; } = null;
         #endregion
 
         #region Constructors
-        public Shift() { }
+        public Roster() { }
 
         [JsonConstructor]
-        public Shift(
+        public Roster(
             int id,
+            List<IUser> users,
+            List<IShift> shifts,
+            bool completed,
             DateTime startDateTime,
             DateTime endDateTime,
-            int userId,
-            User? user,
             DateTime dateCreated,
             DateTime? dateModified)
         {
             Id = id;
+            Users = users;
+            Shifts = shifts;
+            Completed = completed;
             StartDateTime = startDateTime;
             EndDateTime = endDateTime;
-            UserId = userId;
-            User = user;
             DateCreated = dateCreated;
             DateModified = dateModified;
         }
@@ -65,7 +66,7 @@ namespace OrganizingCompanion.Core.Models
         public string ToJson() => JsonSerializer.Serialize(this, _serializerOptions);
         public override string ToString() => string.Format(
             base.ToString() + ".Id:{0}.StartDateTime:{1}.EndDateTime:{2}",
-            Id, StartDateTime, EndDateTime);
+            Id, StartDateTime, EndDateTime, EndDateTime);
         #endregion
     }
 }
