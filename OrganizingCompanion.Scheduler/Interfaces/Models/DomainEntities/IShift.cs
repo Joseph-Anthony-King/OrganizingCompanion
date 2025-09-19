@@ -1,12 +1,11 @@
-﻿using OrganizingCompanion.Core.Models;
+﻿using OrganizingCompanion.Core.Interfaces.Models;
 
-namespace OrganizingCompanion.Core.Interfaces.Models.DomainEntities
+namespace OrganizingCompanion.Scheduler.Interfaces.Models.DomainEntities
 {
     internal interface IShift : IDomainEntity
     {
         DateTime StartDateTime { get; set; }
         DateTime EndDateTime { get; set; }
         int UserId { get; set; }
-        User? User { get; set; }
     }
 }

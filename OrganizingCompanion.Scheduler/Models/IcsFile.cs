@@ -6,7 +6,7 @@ using OrganizingCompanion.Core.Interfaces.Models;
 using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
 
 [assembly:InternalsVisibleTo("OrganizingCompanion.Test")]
-namespace OrganizingCompanion.Core.Models
+namespace OrganizingCompanion.Scheduler.Models
 {
     internal class IcsFile : IIcsFile
     {

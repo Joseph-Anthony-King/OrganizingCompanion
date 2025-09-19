@@ -3,9 +3,9 @@ using System.Text.Json;
 using NUnit.Framework;
 using OrganizingCompanion.Core.Interfaces.Models;
 using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
-using OrganizingCompanion.Core.Models;
+using OrganizingCompanion.Scheduler.Models;
 
-namespace OrganizingCompanion.Test.TestCases.Models
+namespace OrganizingCompanion.Test.TestCases.Models.Scheduler
 {
     public class IcsFileShould
     {
@@ -142,7 +142,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
         public void OverrideToString()
         {
             // Arrange
-            var expectedString = "OrganizingCompanion.Core.Models.IcsFile.Id:1.FileName:test.ics";
+            var expectedString = "OrganizingCompanion.Scheduler.Models.IcsFile.Id:1.FileName:test.ics";
             // Act
             var toString = sut?.ToString();
             // Assert

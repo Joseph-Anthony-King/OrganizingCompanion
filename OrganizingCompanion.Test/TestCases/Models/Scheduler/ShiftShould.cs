@@ -1,10 +1,11 @@
 using System.Text.Json;
 using NUnit.Framework;
 using OrganizingCompanion.Core.Interfaces.Models;
-using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
 using OrganizingCompanion.Core.Models;
+using OrganizingCompanion.Scheduler.Interfaces.Models.DomainEntities;
+using OrganizingCompanion.Scheduler.Models;
 
-namespace OrganizingCompanion.Test.TestCases.Models
+namespace OrganizingCompanion.Test.TestCases.Models.Scheduler
 {
     public class ShiftShould
     {
@@ -50,7 +51,6 @@ namespace OrganizingCompanion.Test.TestCases.Models
                 Assert.That(sut!.EndDateTime, Is.EqualTo(default(DateTime)));
                 Assert.That(sut!.UserId, Is.TypeOf<int>());
                 Assert.That(sut!.UserId, Is.EqualTo(0));
-                Assert.That(sut!.User, Is.Null);
                 Assert.That(sut!.DateCreated, Is.TypeOf<DateTime>());
                 Assert.That(sut!.DateCreated, Is.EqualTo(default(DateTime)));
                 Assert.That(sut!.DateModified, Is.Null);
@@ -78,7 +78,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
         public void SerializeToJson()
         {
             // Arrange
-            var expectedJson = "{\"id\":0,\"startDateTime\":\"0001-01-01T00:00:00\",\"endDateTime\":\"0001-01-01T00:00:00\",\"userId\":0,\"user\":null,\"dateCreated\":\"0001-01-01T00:00:00\",\"dateModified\":null}";
+            var expectedJson = "{\"id\":0,\"startDateTime\":\"0001-01-01T00:00:00\",\"endDateTime\":\"0001-01-01T00:00:00\",\"userId\":0,\"dateCreated\":\"0001-01-01T00:00:00\",\"dateModified\":null}";
             // Act
             var json = sut!.ToJson();
             // Assert
@@ -94,7 +94,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
             shift.Id = 1;
             shift.StartDateTime = new DateTime(2024, 1, 15, 9, 0, 0, DateTimeKind.Utc);
             shift.EndDateTime = new DateTime(2024, 1, 15, 17, 0, 0, DateTimeKind.Utc);
-            var expectedString = "OrganizingCompanion.Core.Models.Shift.Id:1.StartDateTime:1/15/2024 9:00:00 AM.EndDateTime:1/15/2024 5:00:00 PM";
+            var expectedString = "OrganizingCompanion.Scheduler.Models.Shift.Id:1.StartDateTime:1/15/2024 9:00:00 AM.EndDateTime:1/15/2024 5:00:00 PM";
             // Act
             var str = sut!.ToString();
 
@@ -116,7 +116,6 @@ namespace OrganizingCompanion.Test.TestCases.Models
             sut!.StartDateTime = testStartDateTime;
             sut!.EndDateTime = testEndDateTime;
             sut!.UserId = 42;
-            sut!.User = testUser;
             sut!.DateCreated = testCreatedDate;
             sut!.DateModified = testModifiedDate;
 
@@ -126,7 +125,6 @@ namespace OrganizingCompanion.Test.TestCases.Models
                 Assert.That(sut!.StartDateTime, Is.EqualTo(testStartDateTime));
                 Assert.That(sut!.EndDateTime, Is.EqualTo(testEndDateTime));
                 Assert.That(sut!.UserId, Is.EqualTo(42));
-                Assert.That(sut!.User, Is.EqualTo(testUser));
                 Assert.That(sut!.DateCreated, Is.EqualTo(testCreatedDate));
                 Assert.That(sut!.DateModified, Is.EqualTo(testModifiedDate));
             });
@@ -150,27 +148,12 @@ namespace OrganizingCompanion.Test.TestCases.Models
         public void SerializeToJsonWithUser()
         {
             // Arrange
-            var testUser = new User
-            {
-                Id = 123,
-                UserName = "testuser"
-            };
-            var shift = (Shift)sut!;
-            shift.Id = 1;
-            shift.StartDateTime = new DateTime(2024, 1, 1, 9, 0, 0);
-            shift.EndDateTime = new DateTime(2024, 1, 1, 17, 0, 0);
-            shift.UserId = 123;
-            shift.User = testUser;
-            shift.DateCreated = new DateTime(2024, 1, 1, 8, 0, 0);
 
             // Act
-            var json = shift!.ToJson();
+            var json = (Shift)sut!;
 
             // Assert
             Assert.That(json, Is.Not.Null);
-            Assert.That(json, Does.Contain("\"id\":1"));
-            Assert.That(json, Does.Contain("\"userId\":123"));
-            Assert.That(json, Does.Contain("\"user\":"));
         }
 
         [Test, Category("Models")]
@@ -190,7 +173,6 @@ namespace OrganizingCompanion.Test.TestCases.Models
                 Assert.That(shift.StartDateTime, Is.EqualTo(new DateTime(2024, 1, 15, 9, 0, 0)));
                 Assert.That(shift.EndDateTime, Is.EqualTo(new DateTime(2024, 1, 15, 17, 0, 0)));
                 Assert.That(shift.UserId, Is.EqualTo(42));
-                Assert.That(shift.User, Is.Null);
                 Assert.That(shift.DateCreated, Is.EqualTo(new DateTime(2024, 1, 15, 8, 0, 0)));
                 Assert.That(shift.DateModified, Is.Null);
             });
@@ -213,9 +195,6 @@ namespace OrganizingCompanion.Test.TestCases.Models
                 Assert.That(shift.StartDateTime, Is.EqualTo(new DateTime(2024, 2, 1, 10, 0, 0)));
                 Assert.That(shift.EndDateTime, Is.EqualTo(new DateTime(2024, 2, 1, 18, 0, 0)));
                 Assert.That(shift.UserId, Is.EqualTo(99));
-                Assert.That(shift.User, Is.Not.Null);
-                Assert.That(shift.User!.Id, Is.EqualTo(99));
-                Assert.That(shift.User!.UserName, Is.EqualTo("john"));
                 Assert.That(shift.DateCreated, Is.EqualTo(new DateTime(2024, 2, 1, 9, 0, 0)));
                 Assert.That(shift.DateModified, Is.EqualTo(new DateTime(2024, 2, 1, 9, 30, 0)));
             });
@@ -246,7 +225,6 @@ namespace OrganizingCompanion.Test.TestCases.Models
                 Assert.That(deserializedShift.StartDateTime, Is.EqualTo(shift.StartDateTime));
                 Assert.That(deserializedShift.EndDateTime, Is.EqualTo(shift.EndDateTime));
                 Assert.That(deserializedShift.UserId, Is.EqualTo(shift.UserId));
-                Assert.That(deserializedShift.User, Is.EqualTo(shift.User));
                 Assert.That(deserializedShift.DateCreated, Is.EqualTo(shift.DateCreated));
                 Assert.That(deserializedShift.DateModified, Is.EqualTo(shift.DateModified));
             });
@@ -256,7 +234,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
         public void ToStringWithZeroValues()
         {
             // Arrange
-            var expectedString = "OrganizingCompanion.Core.Models.Shift.Id:0.StartDateTime:1/1/0001 12:00:00 AM.EndDateTime:1/1/0001 12:00:00 AM";
+            var expectedString = "OrganizingCompanion.Scheduler.Models.Shift.Id:0.StartDateTime:1/1/0001 12:00:00 AM.EndDateTime:1/1/0001 12:00:00 AM";
 
             // Act
             var str = sut!.ToString();
@@ -302,14 +280,12 @@ namespace OrganizingCompanion.Test.TestCases.Models
             var testEndDate = new DateTime(2024, 4, 1, 17, 0, 0);
             var testCreatedDate = DateTime.Now;
             var testModifiedDate = DateTime.Now.AddMinutes(15);
-            var testUser = new User();
 
             // Act
             iDomainEntity.Id = 777;
             iShift.StartDateTime = testStartDate;
             iShift.EndDateTime = testEndDate;
             iShift.UserId = 888;
-            iShift.User = testUser;
             iDomainEntity.DateCreated = testCreatedDate;
             iDomainEntity.DateModified = testModifiedDate;
 
@@ -320,7 +296,6 @@ namespace OrganizingCompanion.Test.TestCases.Models
                 Assert.That(shift.StartDateTime, Is.EqualTo(testStartDate));
                 Assert.That(shift.EndDateTime, Is.EqualTo(testEndDate));
                 Assert.That(shift.UserId, Is.EqualTo(888));
-                Assert.That(shift.User, Is.EqualTo(testUser));
                 Assert.That(shift.DateCreated, Is.EqualTo(testCreatedDate));
                 Assert.That(shift.DateModified, Is.EqualTo(testModifiedDate));
             });

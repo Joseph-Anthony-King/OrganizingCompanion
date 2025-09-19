@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("OrganizingCompanion.Scheduler")]
 [assembly: InternalsVisibleTo("OrganizingCompanion.Test")]
 
 namespace OrganizingCompanion.Core.Interfaces.Models

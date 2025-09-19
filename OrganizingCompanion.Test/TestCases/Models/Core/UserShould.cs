@@ -4,7 +4,7 @@ using OrganizingCompanion.Core.Interfaces.Models;
 using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
 using OrganizingCompanion.Core.Models;
 
-namespace OrganizingCompanion.Test.TestCases.Models
+namespace OrganizingCompanion.Test.TestCases.Models.Core
 {
     public class UserShould
     {
@@ -116,7 +116,7 @@ namespace OrganizingCompanion.Test.TestCases.Models
         public void SerializeToJson()
         {
             // Arrange
-            var expectedJson = "{\"id\":0,\"username\":\"\",\"firstName\":null,\"lastName\":null,\"email\":\"\",\"phone\":\"\",\"shifts\":[],\"isOrganizer\":false,\"dateCreated\":\"0001-01-01T00:00:00\",\"dateModified\":\"0001-01-01T00:00:00\"}";
+            var expectedJson = "{\"id\":0,\"username\":\"\",\"firstName\":null,\"lastName\":null,\"email\":\"\",\"phone\":\"\",\"isOrganizer\":false,\"dateCreated\":\"0001-01-01T00:00:00\",\"dateModified\":\"0001-01-01T00:00:00\"}";
             // Act
             var json = sut!.ToJson();
             // Assert

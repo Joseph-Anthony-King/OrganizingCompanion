@@ -11,8 +11,6 @@ namespace OrganizingCompanion.Core.Models
     internal class User : IUser
     {
         #region Fields
-        private List<IShift> _shifts = [];
-
         private readonly JsonSerializerOptions _serializerOptions = new()
         {
             ReferenceHandler = ReferenceHandler.IgnoreCycles
@@ -28,7 +26,6 @@ namespace OrganizingCompanion.Core.Models
         string IUser.Email { get => Email; set => Email = value; }
         string IUser.Phone { get => Phone; set => Phone = value; }
         string? IUser.Password { get => Password ?? string.Empty; set => Password = value; }
-        List<IShift> IUser.Shifts { get => _shifts!; set => _shifts = value; }
         bool IUser.IsOrganizer { get => IsOrganizer; set => IsOrganizer = value; }
         DateTime IDomainEntity.DateCreated { get => DateCreated; set => DateCreated = value; }
         DateTime? IDomainEntity.DateModified { get => DateModified; set => DateModified = value; }
@@ -41,7 +38,6 @@ namespace OrganizingCompanion.Core.Models
         [Required, JsonPropertyName("email")] public string Email { get; set; } = string.Empty;
         [Required, JsonPropertyName("phone")] public string Phone { get; set; } = string.Empty;
         [JsonPropertyName("password"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public string? Password { get; set; } = null;
-        [JsonPropertyName("shifts"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public List<Shift> Shifts { get => _shifts.ConvertAll(s => (Shift)s); set => _shifts = value!.ConvertAll(v => (IShift)v); }
         [Required, JsonPropertyName("isOrganizer")] public bool IsOrganizer { get; set; }
         [Required, JsonPropertyName("dateCreated")] public DateTime DateCreated { get; set; } = default;
         [Required, JsonPropertyName("dateModified")] public DateTime? DateModified { get; set; } = default(DateTime);

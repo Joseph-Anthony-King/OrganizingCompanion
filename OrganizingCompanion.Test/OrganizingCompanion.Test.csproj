@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OrganizingCompanion.Core\OrganizingCompanion.Core.csproj" />
+    <ProjectReference Include="..\OrganizingCompanion.Scheduler\OrganizingCompanion.Scheduler.csproj" />
   </ItemGroup>
 
 </Project>
