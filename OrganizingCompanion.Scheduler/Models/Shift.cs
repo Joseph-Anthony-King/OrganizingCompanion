@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using OrganizingCompanion.Core.Interfaces.Models;
-using OrganizingCompanion.Core.Models;
 using OrganizingCompanion.Scheduler.Interfaces.Models.DomainEntities;
 
 [assembly: InternalsVisibleTo("OrganizingCompanion.Test")]
