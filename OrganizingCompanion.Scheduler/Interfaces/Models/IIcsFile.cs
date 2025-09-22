@@ -1,4 +1,6 @@
-namespace OrganizingCompanion.Core.Interfaces.Models.DomainEntities
+using OrganizingCompanion.Core.Interfaces.Models;
+
+namespace OrganizingCompanion.Scheduler.Interfaces.Models
 {
     internal interface IIcsFile : IDomainEntity
     {

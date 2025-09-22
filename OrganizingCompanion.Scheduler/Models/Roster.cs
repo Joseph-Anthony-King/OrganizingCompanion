@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using OrganizingCompanion.Core.Interfaces.Models;
 using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
+using OrganizingCompanion.Scheduler.Interfaces.Models;
 
 namespace OrganizingCompanion.Scheduler.Models
 {

@@ -1,6 +1,6 @@
 ﻿using OrganizingCompanion.Core.Interfaces.Models;
 
-namespace OrganizingCompanion.Scheduler.Interfaces.Models.DomainEntities
+namespace OrganizingCompanion.Scheduler.Interfaces.Models
 {
     internal interface IShift : IDomainEntity
     {

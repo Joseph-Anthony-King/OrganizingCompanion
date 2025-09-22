@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using OrganizingCompanion.Core.Interfaces.Models;
 using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
+using OrganizingCompanion.Scheduler.Interfaces.Models;
 using OrganizingCompanion.Scheduler.Models;
 
 [assembly: InternalsVisibleTo("OrganizingCompanion.Test")]

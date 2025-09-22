@@ -1,4 +1,7 @@
-﻿namespace OrganizingCompanion.Core.Interfaces.Models.DomainEntities
+﻿using OrganizingCompanion.Core.Interfaces.Models;
+using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
+
+namespace OrganizingCompanion.Scheduler.Interfaces.Models
 {
     internal interface IRoster : IDomainEntity
     {

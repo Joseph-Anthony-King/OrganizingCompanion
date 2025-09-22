@@ -1,5 +1,7 @@
+using System.Runtime.CompilerServices;
 using OrganizingCompanion.Core.Interfaces.Models;
 
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace OrganizingCompanion.Core.Interfaces.Repositories
 {
     internal interface IRepository<T> where T : IDomainEntity

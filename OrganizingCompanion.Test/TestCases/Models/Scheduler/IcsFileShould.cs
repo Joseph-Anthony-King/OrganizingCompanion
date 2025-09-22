@@ -2,7 +2,7 @@
 using System.Text.Json;
 using NUnit.Framework;
 using OrganizingCompanion.Core.Interfaces.Models;
-using OrganizingCompanion.Core.Interfaces.Models.DomainEntities;
+using OrganizingCompanion.Scheduler.Interfaces.Models;
 using OrganizingCompanion.Scheduler.Models;
 
 namespace OrganizingCompanion.Test.TestCases.Models.Scheduler

@@ -19,7 +19,7 @@ namespace OrganizingCompanion.Core.Repositories
         {
             try
             {
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, id, nameof(id));
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(id, 0, nameof(id));
 
                 var dbSet = _context.Set<TEntity>();
 
@@ -57,7 +57,7 @@ namespace OrganizingCompanion.Core.Repositories
             {
                 ArgumentNullException.ThrowIfNull(entity, nameof(entity));
 
-                ArgumentOutOfRangeException.ThrowIfNotEqual(0, entity.Id, nameof(entity.Id));
+                ArgumentOutOfRangeException.ThrowIfNotEqual(entity.Id, 0, nameof(entity.Id));
 
                 var dbSet = _context.Set<TEntity>();
 
@@ -80,7 +80,7 @@ namespace OrganizingCompanion.Core.Repositories
             {
                 ArgumentNullException.ThrowIfNull(entity, nameof(entity));
 
-                ArgumentOutOfRangeException.ThrowIfNotEqual(0, entity.Id, nameof(entity.Id));
+                ArgumentOutOfRangeException.ThrowIfNotEqual(entity.Id, 0, nameof(entity.Id));
 
                 var dbSet = _context.Set<TEntity>();
 
@@ -103,7 +103,7 @@ namespace OrganizingCompanion.Core.Repositories
             {
                 ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
-                ArgumentOutOfRangeException.ThrowIfEqual(0, entities.Count, nameof(entities));
+                ArgumentOutOfRangeException.ThrowIfEqual(entities.Count, 0, nameof(entities));
 
                 var dbSet = _context.Set<TEntity>();
 
@@ -152,7 +152,7 @@ namespace OrganizingCompanion.Core.Repositories
             {
                 ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
-                ArgumentOutOfRangeException.ThrowIfEqual(0, entities.Count, nameof(entities));
+                ArgumentOutOfRangeException.ThrowIfEqual(entities.Count, 0, nameof(entities));
 
                 var dbSet = _context.Set<TEntity>();
 
@@ -173,7 +173,7 @@ namespace OrganizingCompanion.Core.Repositories
         {
             try
             {
-                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, id, nameof(id));
+                ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(id, 0, nameof(id));
 
                 var dbSet = _context.Set<TEntity>();
 

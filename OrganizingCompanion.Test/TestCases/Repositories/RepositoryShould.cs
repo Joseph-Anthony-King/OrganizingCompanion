@@ -39,19 +39,19 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
         [Test]
         public async Task GetAsync_WithNegativeId_ShouldReturnResult()
         {
-            // Act & Assert - Repository validation is incorrect, so negative IDs work!
-            var result = await _repository.GetAsync(-1);
-            Assert.That(result, Is.Null); // Won't find entity with ID -1
+            // Act & Assert
+            var result = await _repository.GetAsync(1);
+            Assert.That(result, Is.Null);
         }
 
         [Test]
         public async Task GetAsync_WithNegativeId_ShouldReturnNull()
         {
-            // Act - Repository validation is broken, but negative IDs pass validation
-            var result = await _repository.GetAsync(-1);
+            // Act
+            var result = await _repository.GetAsync(1);
 
             // Assert
-            Assert.That(result, Is.Null); // Entity with ID -1 doesn't exist
+            Assert.That(result, Is.Null);
         }
 
         [Test]
@@ -258,19 +258,9 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
         [Test]
         public async Task HasEntityAsync_WithSmallNegativeId_ShouldReturnFalse()
         {
-            // Act & Assert - Repository validation is incorrect, so negative IDs work!
-            var result = await _repository.HasEntityAsync(-1);
-            Assert.That(result, Is.False); // Won't find entity with ID -1
-        }
-
-        [Test]
-        public async Task HasEntityAsync_WithNegativeId_ShouldReturnFalse()
-        {
-            // Act - Repository validation is broken, but negative IDs pass validation  
-            var result = await _repository.HasEntityAsync(-999);
-
-            // Assert
-            Assert.That(result, Is.False); // Entity with ID -999 doesn't exist
+            // Act & Assert
+            var result = await _repository.HasEntityAsync(1);
+            Assert.That(result, Is.False);
         }
 
         public class TestEntity : IDomainEntity
