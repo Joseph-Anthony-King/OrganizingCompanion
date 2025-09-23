@@ -32,7 +32,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(
                 async () => await _repository.GetAsync(0));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("id"));
         }
 
@@ -71,7 +71,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Arrange
             var entity1 = new TestEntity { Id = 0, DateCreated = DateTime.Now };
             var entity2 = new TestEntity { Id = 0, DateCreated = DateTime.Now.AddMinutes(-5) };
-            
+
             await _repository.AddAsync(entity1);
             await _repository.AddAsync(entity2);
 
@@ -89,7 +89,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentNullException>(
                 async () => await _repository.AddAsync(null!));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("entity"));
         }
 
@@ -102,7 +102,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(
                 async () => await _repository.AddAsync(entity));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("Id"));
         }
 
@@ -112,7 +112,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentNullException>(
                 async () => await _repository.DeleteAsync(null!));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("entity"));
         }
 
@@ -125,7 +125,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(
                 async () => await _repository.DeleteAsync(entity));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("Id"));
         }
 
@@ -135,7 +135,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentNullException>(
                 async () => await _repository.DeleteRangeAsync(null!));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("entities"));
         }
 
@@ -148,7 +148,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(
                 async () => await _repository.DeleteRangeAsync(emptyList));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("entities"));
         }
 
@@ -158,10 +158,10 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Arrange
             var entity1 = new TestEntity { Id = 0, DateCreated = DateTime.Now };
             var entity2 = new TestEntity { Id = 0, DateCreated = DateTime.Now.AddMinutes(-5) };
-            
+
             await _repository.AddAsync(entity1);
             await _repository.AddAsync(entity2);
-            
+
             var entitiesToDelete = new List<TestEntity> { entity1, entity2 };
 
             // Act
@@ -177,7 +177,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentNullException>(
                 async () => await _repository.UpdateAsync(null!));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("entity"));
         }
 
@@ -187,7 +187,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Arrange
             var entity = new TestEntity { Id = 0, DateCreated = DateTime.Now };
             await _repository.AddAsync(entity);
-            
+
             entity.DateModified = DateTime.Now;
 
             // Act
@@ -205,7 +205,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentNullException>(
                 async () => await _repository.UpdateRangeAsync(null!));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("entities"));
         }
 
@@ -218,7 +218,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(
                 async () => await _repository.UpdateRangeAsync(emptyList));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("entities"));
         }
 
@@ -228,13 +228,13 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Arrange
             var entity1 = new TestEntity { Id = 0, DateCreated = DateTime.Now };
             var entity2 = new TestEntity { Id = 0, DateCreated = DateTime.Now.AddMinutes(-5) };
-            
+
             await _repository.AddAsync(entity1);
             await _repository.AddAsync(entity2);
-            
+
             entity1.DateModified = DateTime.Now;
             entity2.DateModified = DateTime.Now;
-            
+
             var entitiesToUpdate = new List<TestEntity> { entity1, entity2 };
 
             // Act
@@ -251,7 +251,7 @@ namespace OrganizingCompanion.Test.TestCases.Repositories
             // Act & Assert
             var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(
                 async () => await _repository.HasEntityAsync(0));
-            
+
             Assert.That(ex!.ParamName, Is.EqualTo("id"));
         }
 

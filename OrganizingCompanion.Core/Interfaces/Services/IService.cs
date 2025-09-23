@@ -1,8 +1,8 @@
 using OrganizingCompanion.Core.Interfaces.Models;
 
-namespace OrganizingCompanion.Core.Interfaces.Repositories
+namespace OrganizingCompanion.Core.Interfaces.Services
 {
-    internal interface IRepository<T> where T : IDomainEntity
+    internal interface IService<T> where T : IDomainEntity
     {
         Task<T> AddAsync(T entity);
         Task<T> GetAsync(int id);
